@@ -30,9 +30,27 @@ public class LinkedList : IEnumerable<int>
     /// <summary>
     /// Insert a new node at the back (i.e. the tail) of the linked list.
     /// </summary>
+    /// <summary>
+/// Insert a new node at the back (i.e. the tail) of the linked list.
+/// </summary>
     public void InsertTail(int value)
     {
-        // TODO Problem 1
+        // Create new node
+        Node newNode = new(value);
+
+        // If the list is empty
+        if (_tail is null)
+        {
+            _head = newNode;
+            _tail = newNode;
+        }
+        // Otherwise, add after the current tail
+        else
+        {
+            newNode.Prev = _tail;   // Connect new node to current tail
+            _tail.Next = newNode;   // Connect current tail to new node
+            _tail = newNode;        // Update tail
+        }
     }
 
 
@@ -62,9 +80,23 @@ public class LinkedList : IEnumerable<int>
     /// <summary>
     /// Remove the last node (i.e. the tail) of the linked list.
     /// </summary>
+    /// <summary>
+/// Remove the last node (i.e. the tail) of the linked list.
+/// </summary>
     public void RemoveTail()
     {
-        // TODO Problem 2
+        // If the list has one or zero nodes
+        if (_head == _tail)
+        {
+            _head = null;
+            _tail = null;
+        }
+        // If the list has more than one node
+        else if (_tail is not null)
+        {
+            _tail.Prev!.Next = null; // Disconnect last node
+            _tail = _tail.Prev;      // Update tail
+        }
     }
 
     /// <summary>
@@ -107,17 +139,54 @@ public class LinkedList : IEnumerable<int>
     /// Remove the first node that contains 'value'.
     /// </summary>
     public void Remove(int value)
+{
+    Node? curr = _head;
+
+    while (curr is not null)
     {
-        // TODO Problem 3
+        if (curr.Data == value)
+        {
+            // Removing the head
+            if (curr == _head)
+            {
+                RemoveHead();
+            }
+            // Removing the tail
+            else if (curr == _tail)
+            {
+                RemoveTail();
+            }
+            // Removing a middle node
+            else
+            {
+                curr.Prev!.Next = curr.Next;
+                curr.Next!.Prev = curr.Prev;
+            }
+
+            return; // Remove only the first occurrence
+        }
+
+        curr = curr.Next;
     }
+}
 
     /// <summary>
     /// Search for all instances of 'oldValue' and replace the value to 'newValue'.
     /// </summary>
     public void Replace(int oldValue, int newValue)
+{
+    Node? curr = _head;
+
+    while (curr is not null)
     {
-        // TODO Problem 4
+        if (curr.Data == oldValue)
+        {
+            curr.Data = newValue;
+        }
+
+        curr = curr.Next;
     }
+}
 
     /// <summary>
     /// Yields all values in the linked list
