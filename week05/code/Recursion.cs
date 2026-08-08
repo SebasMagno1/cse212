@@ -176,7 +176,7 @@ public static class Recursion
     /// Use recursion to insert all paths that start at (0,0) and end at the
     /// 'end' square into the results list.
     /// </summary>
-    public static void SolveMaze(List<string> results, Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
+    /*public static void SolveMaze(List<string> results, Maze maze, int x = 0, int y = 0, List<ValueTuple<int, int>>? currPath = null)
     {
         // If this is the first time running the function,
         // then we need to initialize the currPath list.
@@ -222,5 +222,5 @@ public static class Recursion
 
         // Backtrack
         currPath.RemoveAt(currPath.Count - 1);
-    }
+    }*/
 }
